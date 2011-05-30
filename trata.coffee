@@ -1,12 +1,16 @@
 ops = require 'optimist'
-commandName = ops.argv._[0]
+args = ops.argv._
+commandName = args[0]
 
 trata = require 'trata-juice'
 
 commands =
 	init: () ->
-		trata.init(() ->)
-		console.log "Created pomodoro.txt"
+		trata.init (err) ->
+			if err
+				console.log "Error while initializing pomodoro.txt: " + err
+			else
+				console.log "Created pomodoro.txt"
 	help: () -> 
 		showUsage()
 
